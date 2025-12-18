@@ -44,6 +44,8 @@ const init = (onAuthenticatedCallback: () => void) => {
   KC.init({
     onLoad: 'login-required',
     pkceMethod: 'S256',
+    checkLoginIframe: globalThis.location.hostname !== 'localhost', // Disable checkLoginIframe on localhost to avoid infinite refresh loop
+    enableLogging: globalThis.location.hostname === 'localhost', // Enable logging on localhost to debug issues
   })
     .then((authenticated: boolean) => {
       if (authenticated) {
